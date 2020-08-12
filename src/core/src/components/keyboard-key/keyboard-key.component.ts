@@ -70,6 +70,9 @@ export class MatKeyboardKeyComponent implements OnInit, OnDestroy {
   bkspClick = new EventEmitter<MouseEvent>();
 
   @Output()
+  clearClick = new EventEmitter<MouseEvent>();
+
+  @Output()
   capsClick = new EventEmitter<MouseEvent>();
 
   @Output()
@@ -126,10 +129,22 @@ export class MatKeyboardKeyComponent implements OnInit, OnDestroy {
   get cssClass(): string {
     const classes = [];
 
+    let cssName : string = this.lowerKey;
+    if (cssName == '.') {
+      cssName = 'dot';
+    } else if (cssName == '+') {
+      cssName = 'plus';
+    } else if (cssName == ',') {
+      cssName = 'comma';
+    } else if (cssName == '-') {
+      cssName = 'minus';
+    }
+
     if (this.hasIcon) {
       classes.push('mat-keyboard-key-modifier');
-      classes.push(`mat-keyboard-key-${this.lowerKey}`);
     }
+
+    classes.push('mat-keyboard-key-'+cssName);
 
     if (this.isDeadKey) {
       classes.push('mat-keyboard-key-deadkey');
@@ -202,6 +217,11 @@ export class MatKeyboardKeyComponent implements OnInit, OnDestroy {
       case KeyboardClassKey.Bksp:
         this.deleteSelectedText();
         this.bkspClick.emit(event);
+        break;
+
+      case KeyboardClassKey.Clear:
+        this.deleteAllText();
+        this.clearClick.emit(event);
         break;
 
       case KeyboardClassKey.Caps:
@@ -279,6 +299,13 @@ export class MatKeyboardKeyComponent implements OnInit, OnDestroy {
           };
           break;
 
+        case KeyboardClassKey.Clear:
+          keyFn = () => {
+            this.deleteAllText();
+            this.clearClick.emit();
+          };
+          break;
+
         case KeyboardClassKey.Space:
           char = VALUE_SPACE;
           keyFn = () => this.spaceClick.emit();
@@ -340,6 +367,11 @@ export class MatKeyboardKeyComponent implements OnInit, OnDestroy {
     }
 
     this._getInputElement().setRangeText("", caret, caret + selectionLength);
+  }
+
+  private deleteAllText(): void {
+    const value = this.inputValue ? this.inputValue.toString() : '';
+    this._getInputElement().setRangeText("", 0, value.length);
   }
 
   private replaceSelectedText(char: string): void {

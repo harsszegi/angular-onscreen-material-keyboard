@@ -7,5 +7,6 @@ export const KEYBOARD_ICONS: IKeyboardIcons = {
   [KeyboardClassKey.Enter]: { name: 'keyboard_return' },
   [KeyboardClassKey.Shift]: { name: 'keyboard_arrow_up' },
   [KeyboardClassKey.Space]: { name: ' ' },
-  [KeyboardClassKey.Tab]: { name: 'keyboard_tab' }
+  [KeyboardClassKey.Tab]: { name: 'keyboard_tab' },
+  [KeyboardClassKey.Clear]: { name: 'clear' }
 };
