@@ -344,14 +344,14 @@ export class MatKeyboardKeyComponent implements OnInit, OnDestroy {
 
   private replaceSelectedText(char: string): void {
     const value = this.inputValue ? this.inputValue.toString() : '';
+    const selectionLength = this._getSelectionLength();
 
     let el = this._getInputElement();
-    if (el && 'maxLength' in el && value.length + char.length > el.maxLength) {
+    if (el && 'maxLength' in el && value.length - selectionLength + char.length > el.maxLength) {
       return;
     }
 
     const caret = this.input ? this._getCursorPosition() : 0;
-    const selectionLength = this._getSelectionLength();
     const headPart = value.slice(0, caret);
     const endPart = value.slice(caret + selectionLength);
     this._getInputElement().setRangeText(char, caret, caret + selectionLength);
