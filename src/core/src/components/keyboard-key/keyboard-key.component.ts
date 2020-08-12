@@ -347,7 +347,7 @@ export class MatKeyboardKeyComponent implements OnInit, OnDestroy {
     const selectionLength = this._getSelectionLength();
 
     let el = this._getInputElement();
-    if (el && 'maxLength' in el && value.length - selectionLength + char.length > el.maxLength) {
+    if (el && 'maxLength' in el && el.maxLength > 0 && value.length - selectionLength + char.length > el.maxLength) {
       return;
     }
 
