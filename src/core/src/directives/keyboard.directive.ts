@@ -36,6 +36,7 @@ export class MatKeyboardDirective implements OnDestroy {
     this.hideKeyboard();
   }
 
+  @HostListener('onFocus', ['$event'])
   @HostListener('focus', ['$event'])
   @HostListener('ionFocus', ['$event'])
   public showKeyboard() {
