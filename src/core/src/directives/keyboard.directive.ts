@@ -6,7 +6,7 @@ import { MatKeyboardComponent } from '../components/keyboard/keyboard.component'
 import { MatKeyboardService } from '../services/keyboard.service';
 
 @Directive({
-  selector: 'p-inputMask[matKeyboard], ion-input[matKeyboard], ion-textarea[matKeyboard], input[matKeyboard], textarea[matKeyboard]'
+  selector: 'p-inputMask[matKeyboard], p-inputNumber[matKeyboard], p-inputText[matKeyboard], ion-input[matKeyboard], ion-textarea[matKeyboard], input[matKeyboard], textarea[matKeyboard]'
 })
 export class MatKeyboardDirective implements OnDestroy {
 
