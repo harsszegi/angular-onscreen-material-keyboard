@@ -61,6 +61,7 @@ export class MatKeyboardDirective implements OnDestroy {
     this._keyboardRef.instance.shiftClick.subscribe(() => this.shiftClick.next());
   }
 
+  @HostListener('onBlur', ['$event'])
   @HostListener('blur', ['$event'])
   @HostListener('ionBlur', ['$event'])
   public hideKeyboard() {
